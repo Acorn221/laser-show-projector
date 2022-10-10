@@ -1,55 +1,55 @@
-import React from 'react';
-import { XyzTransitionGroup } from '@animxyz/react';
-
+import React, { useState, createContext, useEffect } from 'react';
+import KeystoneCorrection from '@/components/KeystoneCorrection';
 import '@/index.css';
 
-const App = () => {
-  const [count, setCount] = React.useState(0);
-  const [showCount, setShowCount] = React.useState(true);
+const defaultSettings = {
+  keystoneCorrection: {
+    enable: false,
+  },
+};
 
-  const increment = () => {
-    setShowCount(false);
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        setShowCount(true);
-        setCount(count + 1);
-      });
-    }, 150);
+export const Settings = createContext({ currentSettings: defaultSettings, updateSettings: (settings: any) => {} });
+
+const App = () => {
+  const [showSection, setShowSection] = useState(0);
+  const [settings, setSettings] = useState({ currentSettings: defaultSettings, updateSettings: (x: any) => {} });
+
+  useEffect(() => {
+    setSettings({ currentSettings: defaultSettings, updateSettings: (x: any) => setSettings(x) });
+  }, []);
+
+  const toggleSelection = (selection: number) => {
+    setShowSection(selection === showSection ? 0 : selection);
   };
 
   return (
     <div className="flex justify-center align-middle h-screen">
-      <div className="bg-white m-auto p-10 rounded-xl w-3/4 md:w-1/2 text-center">
-        <div className="underline text-5xl">Hello World</div>
-        <div className="flex justify-center m-5">
-          <button className="text-2xl m-auto w-full bg-slate-200 hover:bg-slate-300 p-5 rounded-2xl flex" onClick={() => increment()}>
-            <div className="flex-initial">
-              Click Count:
-            </div>
-            <XyzTransitionGroup xyz="fade down-100% back-2" duration={150} className="flex-1">
-              {showCount && (
-              <div>
-                {count}
-              </div>
-              )}
-            </XyzTransitionGroup>
+      <div className="bg-gray-200 p-4 rounded-lg m-auto">
+        <div className="text-5xl">Laser Controls</div>
+        <hr className="bg-black h-1 rounded-full mt-3 mb-3" />
+        <div className="grid gap-2 grid-cols-2">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => toggleSelection(1)}>
+            Keystone Correction
+          </button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => toggleSelection(2)}>
+            Laser Power and Colours
           </button>
         </div>
-        <div className="m-5 text-left">
-          <div className="underline text-2xl mb-3">
-            This Template Uses:
-          </div>
-          <ul>
-            <li>○ Yarn</li>
-            <li>○ Typescript</li>
-            <li>○ React</li>
-            <li>○ Tailwind</li>
-            <li>○ Absolute Paths (@/components/MyComponent)</li>
-            <li>○ Vite</li>
-            <li>○ Github Pages, For Easy Deployment</li>
-            <li>○ Eslint</li>
-          </ul>
-        </div>
+
+        <Settings.Provider value={settings}>
+          {showSection === 1 && (
+            <KeystoneCorrection />
+          )}
+          {showSection === 2 && (
+            <div className="bg-gray-300 mt-4 mb-4 p-3 ">
+              <div className="text-2xl">Laser Power and Colours</div>
+              <hr className="bg-black h-1 rounded-full mt-3 mb-3" />
+              <div className="flex flex-row">
+                hi
+              </div>
+            </div>
+          )}
+        </Settings.Provider>
       </div>
     </div>
   );
