@@ -1,11 +1,13 @@
-# My Web Project Template
+# This is the web interface for the laser
 
-This template uses:
- - [x] Yarn
- - [x] Typescript
- - [x] React
- - [x] Tailwind
- - [x] Absolute Paths ('@/components/MyComponent')
- - [x] Vite
- - [x] Github Pages, For Easy Deployment
- - [x] Eslint
+TODO:
+
+- [ ] Add a way to set the laser power
+  - [ ] 4 point keystone correction
+    - [ ] A little ui for this would be very nice
+  - [ ] Brightness control
+- [ ] Add a way to play pong
+  - [ ] controls for each player
+    - [ ] Just 2 buttons
+- [ ] Mobile compatibility
+  - [ ] Everything needs to scale well
