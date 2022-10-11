@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import ArrowAdjustment from '@/components/ArrowAdjustment';
 import { Settings } from '@/App';
 
 const KeystoneCorrection = () => {
@@ -32,6 +33,7 @@ const KeystoneCorrection = () => {
           <input type="checkbox" checked={enable} onChange={() => toggleKeystoneCorrection()} />
         </div>
       </div>
+      <ArrowAdjustment value={{ xOffset: 0, yOffset: 0 }} />
     </div>
   );
 };
