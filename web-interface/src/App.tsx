@@ -5,6 +5,10 @@ import '@/index.css';
 const defaultSettings = {
   keystoneCorrection: {
     enable: false,
+    state: {
+      xOffset: 0,
+      yOffset: 0,
+    },
   },
 };
 

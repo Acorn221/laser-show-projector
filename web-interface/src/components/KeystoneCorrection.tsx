@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import ArrowAdjustment from '@/components/ArrowAdjustment';
 import { Settings } from '@/App';
+import KeystoneCorrectionVisualisation from './KeystoneCorrectionVisualisation';
 
 const KeystoneCorrection = () => {
   const settings = useContext(Settings);
   const [enable, setEnable] = useState(settings.currentSettings.keystoneCorrection.enable);
+  const [keystone, setKeystone] = useState(settings.currentSettings.keystoneCorrection.state);
 
   const toggleKeystoneCorrection = () => {
     settings.updateSettings({
@@ -33,7 +35,8 @@ const KeystoneCorrection = () => {
           <input type="checkbox" checked={enable} onChange={() => toggleKeystoneCorrection()} />
         </div>
       </div>
-      <ArrowAdjustment value={{ xOffset: 0, yOffset: 0 }} />
+      <ArrowAdjustment value={{ xOffset: 0, yOffset: 0 }} onChange={(x) => { setKeystone(x); }} />
+      <KeystoneCorrectionVisualisation state={{ enabled: true, points: { x: keystone.xOffset, y: keystone.yOffset } }} />
     </div>
   );
 };

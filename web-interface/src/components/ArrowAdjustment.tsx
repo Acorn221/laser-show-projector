@@ -19,7 +19,7 @@ const iconClassName = 'w-8 h-8 hover:invert-[20%] m-auto';
 
 const stepsString = [0.01, 0.1, 1, 10].map((x) => x.toString());
 
-const ArrowAdjustment = ({ value, onChange }: {value: ArrowStateInterface}) => {
+const ArrowAdjustment = ({ value, onChange }: {value: ArrowStateInterface, onChange: (x: ArrowStateInterface) => void}) => {
   const [state, setState] = useState(value);
   const [step, setStep] = useState(value.step ? value.step.toString() : stepsString[0]);
 
@@ -41,7 +41,7 @@ const ArrowAdjustment = ({ value, onChange }: {value: ArrowStateInterface}) => {
       default:
         break;
     }
-    console.log(state);
+    onChange(state);
   };
 
   return (
