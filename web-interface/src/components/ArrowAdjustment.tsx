@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, {
+  useState, useCallback, useEffect, useContext,
+} from 'react';
 import {
   BsFillArrowUpCircleFill,
   BsFillArrowLeftCircleFill,
@@ -8,6 +10,7 @@ import {
 
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { Settings } from '@/App';
 
 export interface ArrowStateInterface {
 	xOffset: number;
@@ -17,11 +20,12 @@ export interface ArrowStateInterface {
 
 const iconClassName = 'w-8 h-8 hover:invert-[20%] m-auto';
 
-const stepsString = [0.01, 0.1, 1, 10].map((x) => x.toString());
+const stepsString = [0.05, 0.1, 1, 10].map((x) => x.toString());
 
-const ArrowAdjustment = ({ value, onChange }: {value: ArrowStateInterface, onChange: (x: ArrowStateInterface) => void}) => {
-  const [state, setState] = useState(value);
-  const [step, setStep] = useState(value.step ? value.step.toString() : stepsString[0]);
+const ArrowAdjustment = () => {
+  const context = useContext(Settings);
+  const [state, setState] = useState(context.currentSettings.keystoneCorrection.state);
+  const [step, setStep] = useState('0.1');
 
   const buttonPress = (button: string) => {
     const stepFloat = parseFloat(step);
@@ -41,8 +45,14 @@ const ArrowAdjustment = ({ value, onChange }: {value: ArrowStateInterface, onCha
       default:
         break;
     }
-    onChange(state);
   };
+
+  useEffect(() => {
+    context.updateSettings({
+      ...context.currentSettings,
+      keystoneCorrection: { ...context.currentSettings.keystoneCorrection, state },
+    });
+  }, [state]);
 
   return (
     <div className="m-5 h-32 w-44 grid grid-cols-3 gap-2">

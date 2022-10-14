@@ -18,8 +18,13 @@ const App = () => {
   const [showSection, setShowSection] = useState(0);
   const [settings, setSettings] = useState({ currentSettings: defaultSettings, updateSettings: (x: any) => {} });
 
+  const updateSettings = (newSettings: any) => {
+    console.log("Got new settings", newSettings);
+    setSettings({ currentSettings: newSettings, updateSettings });
+  };
+
   useEffect(() => {
-    setSettings({ currentSettings: defaultSettings, updateSettings: (x: any) => setSettings(x) });
+    updateSettings(defaultSettings);
   }, []);
 
   const toggleSelection = (selection: number) => {

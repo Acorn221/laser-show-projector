@@ -1,5 +1,6 @@
 import Perspective from 'perspectivets';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
+import { Settings } from '@/App';
 import PongImg from '@/Pong.jpg';
 
 // TODO: Add 4 point keystone correction
@@ -18,7 +19,9 @@ export interface KeystoneCorrectionSettings {
 	}
 }
 
-const KeystoneCorrectionVisualisation = ({ state } : {state: KeystoneCorrectionSettings}) => {
+const KeystoneCorrectionVisualisation = () => {
+  const context = useContext(Settings);
+  const { state } = context.currentSettings.keystoneCorrection;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const draw2PointKeystone = () => {
     const img = new Image();
@@ -36,8 +39,8 @@ const KeystoneCorrectionVisualisation = ({ state } : {state: KeystoneCorrectionS
       }
 
       const { height, width } = ctx.canvas;
-      const x = state.points.x as number;
-      const y = state.points.y as number;
+      const x = state.xOffset;
+      const y = state.yOffset;
       const p = new Perspective(ctx, img);
       // it looks ugly but it works
       p.draw({
@@ -54,11 +57,7 @@ const KeystoneCorrectionVisualisation = ({ state } : {state: KeystoneCorrectionS
 
     img.src = PongImg;
   };
-
-  useEffect(() => {
-    draw2PointKeystone();
-    console.log(state);
-  }, [state]);
+  draw2PointKeystone();
 
   return (
     <canvas ref={canvasRef} />

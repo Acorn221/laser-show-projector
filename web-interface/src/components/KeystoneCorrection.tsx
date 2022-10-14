@@ -5,21 +5,21 @@ import KeystoneCorrectionVisualisation from './KeystoneCorrectionVisualisation';
 
 const KeystoneCorrection = () => {
   const settings = useContext(Settings);
-  const [enable, setEnable] = useState(settings.currentSettings.keystoneCorrection.enable);
-  const [keystone, setKeystone] = useState(settings.currentSettings.keystoneCorrection.state);
+  const [keystone, setKeystone] = useState(settings.currentSettings.keystoneCorrection);
+
+  const syncToSettings = () => {
+    settings.updateSettings({
+      ...settings.currentSettings,
+      keystoneCorrection: keystone,
+    });
+  };
 
   const toggleKeystoneCorrection = () => {
-    settings.updateSettings({
-      updateSettings: settings.updateSettings,
-      currentSettings: {
-        ...settings.currentSettings,
-        keystoneCorrection: {
-          ...settings.currentSettings.keystoneCorrection,
-          enable: !enable,
-        },
-      },
+    setKeystone({
+      ...keystone,
+      enable: !keystone.enable,
     });
-    setEnable(!enable);
+    syncToSettings();
   };
 
   return (
@@ -32,11 +32,11 @@ const KeystoneCorrection = () => {
           <div className="text-sm">Enable keystone correction to compensate for the distortion of the laser beam.</div>
         </div>
         <div className="flex flex-col">
-          <input type="checkbox" checked={enable} onChange={() => toggleKeystoneCorrection()} />
+          <input type="checkbox" checked={keystone.enable} onChange={() => toggleKeystoneCorrection()} />
         </div>
       </div>
-      <ArrowAdjustment value={{ xOffset: 0, yOffset: 0 }} onChange={(x) => { setKeystone(x); }} />
-      <KeystoneCorrectionVisualisation state={{ enabled: true, points: { x: keystone.xOffset, y: keystone.yOffset } }} />
+      <ArrowAdjustment />
+      <KeystoneCorrectionVisualisation />
     </div>
   );
 };
