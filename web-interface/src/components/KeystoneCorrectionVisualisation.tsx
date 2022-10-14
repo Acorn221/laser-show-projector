@@ -8,14 +8,8 @@ import PongImg from '@/Pong.jpg';
 export interface KeystoneCorrectionSettings {
 	enabled: boolean;
 	points: {
-			x: number | {
-				top: {x: number, y: number};
-				right: {x: number, y: number};
-			};
-			y: number | {
-				bottom: {x: number, y: number};
-				left: {x: number, y: number};
-		};
+			x: number;
+			y: number;
 	}
 }
 
