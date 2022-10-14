@@ -19,7 +19,6 @@ const App = () => {
   const [settings, setSettings] = useState({ currentSettings: defaultSettings, updateSettings: (x: any) => {} });
 
   const updateSettings = (newSettings: any) => {
-    console.log("Got new settings", newSettings);
     setSettings({ currentSettings: newSettings, updateSettings });
   };
 

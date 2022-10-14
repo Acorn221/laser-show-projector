@@ -29,7 +29,7 @@ const KeystoneCorrection = () => {
       <div className="flex flex-row">
         <div className="flex flex-col">
           <div className="text-xl">Enable Keystone Correction</div>
-          <div className="text-sm">Enable keystone correction to compensate for the distortion of the laser beam.</div>
+          <div className="text-sm">Enable keystone correction to compensate for the distortion of the laser's shape on the wall.</div>
         </div>
         <div className="flex flex-col">
           <input type="checkbox" checked={keystone.enable} onChange={() => toggleKeystoneCorrection()} />
