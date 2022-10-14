@@ -3,8 +3,6 @@ import { useEffect, useRef, useContext } from 'react';
 import { Settings } from '@/App';
 import PongImg from '@/Pong.jpg';
 
-// TODO: Add 4 point keystone correction
-
 export interface KeystoneCorrectionSettings {
 	enabled: boolean;
 	points: {

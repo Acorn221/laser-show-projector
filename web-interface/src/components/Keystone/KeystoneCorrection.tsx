@@ -1,25 +1,19 @@
 import React, { useContext, useState } from 'react';
-import ArrowAdjustment from '@/components/ArrowAdjustment';
+import ArrowAdjustment from '@/components/Keystone/ArrowAdjustment';
 import { Settings } from '@/App';
 import KeystoneCorrectionVisualisation from './KeystoneCorrectionVisualisation';
 
 const KeystoneCorrection = () => {
   const settings = useContext(Settings);
-  const [keystone, setKeystone] = useState(settings.currentSettings.keystoneCorrection);
-
-  const syncToSettings = () => {
-    settings.updateSettings({
-      ...settings.currentSettings,
-      keystoneCorrection: keystone,
-    });
-  };
 
   const toggleKeystoneCorrection = () => {
-    setKeystone({
-      ...keystone,
-      enable: !keystone.enable,
+    settings.updateSettings({
+      ...settings.currentSettings,
+      keystoneCorrection: {
+        ...settings.currentSettings.keystoneCorrection,
+        enable: !settings.currentSettings.keystoneCorrection.enable,
+      },
     });
-    syncToSettings();
   };
 
   return (
@@ -29,14 +23,16 @@ const KeystoneCorrection = () => {
       <div className="flex flex-row">
         <div className="flex flex-col">
           <div className="text-xl">Enable Keystone Correction</div>
-          <div className="text-sm">Enable keystone correction to compensate for the distortion of the laser's shape on the wall.</div>
+          <div className="text-sm">Enable keystone correction to compensate for the distortion of the laser&apos;s shape on the wall.</div>
         </div>
         <div className="flex flex-col">
-          <input type="checkbox" checked={keystone.enable} onChange={() => toggleKeystoneCorrection()} />
+          <input type="checkbox" checked={settings.currentSettings.keystoneCorrection.enable} onChange={() => toggleKeystoneCorrection()} />
         </div>
       </div>
-      <ArrowAdjustment />
-      <KeystoneCorrectionVisualisation />
+      <div className="grid gap-2 md:grid-cols-2 grid-cols-1">
+        <ArrowAdjustment />
+        <KeystoneCorrectionVisualisation />
+      </div>
     </div>
   );
 };

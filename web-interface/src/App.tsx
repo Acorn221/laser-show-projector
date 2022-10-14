@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect } from 'react';
-import KeystoneCorrection from '@/components/KeystoneCorrection';
+import KeystoneCorrection from '@/components/Keystone/KeystoneCorrection';
 import '@/index.css';
+import LaserPower from './components/LaserPower';
 
 const defaultSettings = {
   keystoneCorrection: {
@@ -8,6 +9,16 @@ const defaultSettings = {
     state: {
       xOffset: 0,
       yOffset: 0,
+    },
+  },
+  lasers: {
+    blue: {
+      enable: true,
+      power: 100,
+    },
+    green: {
+      enable: true,
+      power: 100,
     },
   },
 };
@@ -49,13 +60,7 @@ const App = () => {
             <KeystoneCorrection />
           )}
           {showSection === 2 && (
-            <div className="bg-gray-300 mt-4 mb-4 p-3 ">
-              <div className="text-2xl">Laser Power and Colours</div>
-              <hr className="bg-black h-1 rounded-full mt-3 mb-3" />
-              <div className="flex flex-row">
-                hi
-              </div>
-            </div>
+            <LaserPower />
           )}
         </Settings.Provider>
       </div>
