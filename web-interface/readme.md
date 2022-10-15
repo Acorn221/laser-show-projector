@@ -2,11 +2,12 @@
 
 TODO:
 
-- [ ] Add a way to set the laser power
-  - [ ] 4 point keystone correction
-    - [ ] A little ui for this would be very nice
-  - [ ] Brightness control
+- [x] Add a way to set the laser power
+  - [x] keystone correction
+    - [x] A little ui for this would be very nice
+  - [x] Brightness control
 - [ ] Add a way to play pong
+  - [ ] Using a websocket for controls
   - [ ] controls for each player
     - [ ] Just 2 buttons
 - [ ] Mobile compatibility
