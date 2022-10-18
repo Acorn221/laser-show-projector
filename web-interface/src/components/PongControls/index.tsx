@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BsFillArrowUpSquareFill, BsFillArrowDownSquareFill } from 'react-icons/bs';
 
 const PongControls = () => {
+	// TODO: setup the websocket properly in the context
   const ws = new WebSocket('ws://127.0.0.1:8080');
   const [id, setId] = useState('');
   const sendMove = (dir: number) => {
