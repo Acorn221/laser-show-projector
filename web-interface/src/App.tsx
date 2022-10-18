@@ -1,7 +1,8 @@
 import React, { useState, createContext, useEffect } from 'react';
 import KeystoneCorrection from '@/components/Keystone/KeystoneCorrection';
 import '@/index.css';
-import LaserPower from './components/LaserPower';
+import LaserPower from '@/components/LaserPower';
+import PongControls from '@/components/PongControls';
 
 const defaultSettings = {
   keystoneCorrection: {
@@ -53,6 +54,9 @@ const App = () => {
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => toggleSelection(2)}>
             Laser Power and Colours
           </button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={() => toggleSelection(3)}>
+            Pong Controls
+          </button>
         </div>
 
         <Settings.Provider value={settings}>
@@ -61,6 +65,9 @@ const App = () => {
           )}
           {showSection === 2 && (
             <LaserPower />
+          )}
+          {showSection === 3 && (
+            <PongControls />
           )}
         </Settings.Provider>
       </div>
